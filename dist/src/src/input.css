@@ -1,0 +1,5 @@
+@import "tailwindcss";
+/* ./src/input.css or ./src/styles.css */
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');

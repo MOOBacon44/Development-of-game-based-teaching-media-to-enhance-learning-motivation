@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="../src/image/favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quizten homepage</title> 
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+  </style>
+  <style>
+   body { font-family: 'Caveat', 'Sriracha'; }
+  </style>
+  <script type="module" src="index.js"></script>
+ 
+  <link rel="stylesheet" href="output.css">
+</head>
+<body class="overflow-hidden bg-[url('../src/sprites/bg.png')] bg-no-repeat bg-cover bg-center h-screen">
+<style>
+
+  #bill {
+    z-index: 888;
+  }
+
+  #loadsc {
+    position: fixed !important;
+    background-color: #f3ebdb;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+  }
+ 
+  #cancelButton {
+    font-size: 35px;
+    margin-right: 1rem;
+    color: #7f541b;
+    }
+
+    #keepEditing, #closeQuiz {
+      font-size: 25px;
+      color: #7f541b;
+    }
+
+    h2{
+      font-size: 25px;  
+    }
+
+    #found {
+      font-size: 27px;
+      color: #7f541b;
+    }
+
+    #searchInput {
+      background-color: #efe1c2;
+      color: #422602;
+    }
+
+    #l1 {
+      color: #7f541b;
+    }
+     #l2 {
+      color: #7f541b;
+      font-size: 24px;
+    }
+    #l21 {
+      color: #7f541b5c;
+      font-size: 24px;
+    }
+    #l3 {
+       color: #4f8fb1;
+       font-size: 24px;
+    }
+
+    #resutag {
+      color: #7f541b;
+      font-size: 27px;
+    }
+
+    #quizDes,#quizTitle {
+      color: #7f541b;
+    }
+
+    #addQuestion button {
+      color: #7f541b;
+    }
+
+    #publicQuiz, #playQuiz {
+      color: #7f541b;
+      font-size: 22px;
+      background-color: #efe1c2;
+    }
+
+    #loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #4f8fb1;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+     100% {
+        transform: rotate(360deg);
+    }
+    } 
+</style>
+
+
+<div id="loadsc" style="display:block;">
+  <div class="w-[50%] h-[40%]"></div>
+  <span id="loader" class="ml-[50%] mr-[50%]"></span>
+</div>
+<audio id="bgm" src="../src/audi/music.mp3" style="display: none;" controls muted></audio>
+<audio id="sfx" style="display: none;"></audio>
+<!--content-->
+<div id="bill" style="display:block;">
+  <div class="w-[20%] h-[40%] left-0 top-0 -z-30 bg-[url('../src/sprites/tl.png')] bg-no-repeat bg-center bg-cover fixed "></div> 
+  <div class="w-[20%] h-[40%] right-0 bottom-0 -z-30 bg-[url('../src/sprites/br.png')] bg-no-repeat bg-center bg-cover fixed "></div> 
+  <div class="w-[20%] h-[20%] ml-2.5 left-[12%] bottom-0 z-10 bg-[url('../src/sprites/pen.png')] bg-no-repeat bg-center bg-cover fixed "></div> <!--pen-->
+  <!--bg clip-->
+  <div class="w-[25%] h-[35%] left-[50%] mt-1.5 items-center z-40 flex flex-col fixed"><div class="w-[30%] h-[35%] z-40"></div><div class="w-[75%] h-[60%] z-30 bg-[url('../src/sprites/n.png')] bg-no-repeat bg-cover bg-center"></div></div>
+  <div class="w-[25%] h-[35%] left-[50%] mt-1.5 items-center z-40 flex flex-col fixed"><div class="w-[30%] h-[35%] z-40"></div>
+    <div id="clip" class="w-[75%] h-[60%] left-[50%] z-40 bg-[url('../src/sprites/p.png')] bg-no-repeat bg-cover bg-center"></div>
+  </div>       
+  <div class="bg-[url('../src/sprites/bill.png')] bg-no-repeat bg-center bg-cover z-0 absolute ml-17 w-[90%] h-screen">
+    <!--search pannel-->
+    <div  class="absolute top-45 left-69 w-[19%] h-[69%] m-1.5 flex flex-col z-10 gap-y-2 p-4">
+          <div class="w-full h-[16%]"></div>
+          <div class="w-full h-[8%] flex flex-wrap text-xl" id="l1">-----------------------------------</div>
+          <div class="w-full h-[12%] flex flex-row-reverse items-center gap-x-4">
+              <button id="createQuiz" class="h-full w-[40%] ml-12 content-center bg-[url('../src/sprites/create.png')] bg-cover"></button>
+              <div class="h-full w-[55%] content-center " id="l2"><h1>Create quiz! =></h1></div>
+          </div>
+          <div class="w-full h-[8%] flex flex-wrap text-xl" id="l1">-----------------------------------</div>
+               <div class="w-full h-[10%] flex flex-row items-center gap-x-2 mt-1">
+               <input autocomplete="off" id="searchInput" type="text" placeholder="Quiz code or keyword" class=" p-0.5 m-1 w-[75%] h-[80%] text-xl" required/>
+               <div class="w-[20%] h-full">
+                    <button id="search">
+                      <picture>
+                          <img src="/src/sprites/s_icon.png" alt="s_icon" draggable="false" class="w-full h-full" />
+                      </picture>
+                    </button> 
+               </div>
+               </div>
+                <div class="w-full h-[5%] flex flex-row-reverse items-center gap-x-4 p-1.5 ">
+                    <div id="resutag" class="h-full w-[40%] ml-12 text-right content-center"></div>
+                    <div class="h-full w-[40%] content-center" id = "found">Found:</div>
+                    </div> <div class="w-full h-[5%] flex flex-row-reverse items-center gap-x-4 p-5 "><h1 id = "l21">Rate us!</h1></div>
+                    <div class = "w-full h-[20%] flex flex-row-reverse gap-x-4">
+                      <div id ="qr" class="h-[85%] w-[35%] bg-[url('/src/sprites/NqzTHt_qrcode.png')] bg-no-repeat bg-center bg-cover">
+                        
+                      </div>
+                    </div>
+                </div>
+              
+              <!--quiz list-->
+              <div id="main_list" class="w-[42%] h-[56%] right-42 top-45 absolute overflow-auto">
+                <div id="7f541b" style="display: none;" class="flex flex-center"></div>
+                <div id="quizList" class="gap-y-1.5 flex flex-col m-2.5">
+                    <h2 id="availableQuizzes"></h2>
+                    <ul id="quizItems" style="display:none" class=" m-1.5 p-1.5"></ul>
+                  </div>
+              </div>
+
+  </div>
+</div><div class="m-auto w-[50%] h-[20%]"></div>
+       <!--create question-->
+<div class="m-auto inset-0 flex flex-wrap max-w-fit h-auto bg-amber-50 flex-col p-1.5 z-30 max-h-[80vh] overflow-auto" style="display:none;" id="quizCreationForm">
+          <div id="cancelButton" class="flex flex-row-reverse sticky top-0 mr-1.5"> 
+            <button id="cancelQuiz">x</button> 
+          </div>
+
+          <form id="quizForm"  class="gap-y-3 p-1.5">
+
+              <input type="text" id="quizTitle" placeholder="Quiz Title" class="w-full mb-2 text-xl outline-dotted outline-1" required />
+              <input type="text" id="quizDes" placeholder="Description" class="w-full mb-2 text-xl outline-dotted outline-1" />
+              <div id="questionsContainer" class="flex flex-col gap-y-2.5 p-1.5 max-h-[40vh] overflow-y-auto">
+            
+              </div>
+              <div class="flex flex-row flex-wrap p-1.5 w-[55%] h-[10%]" id="addQuestion">
+                  <div class="w-[30%] bg-[url('../src/sprites/plus.png')] bg-no-repeat bg-center bg-cover"></div>
+                  <button class="m-2.5 text-xl">Add Question</button>
+              </div>
+              <div class="flex flex-row justify-center m-0.5 p-4">
+                  <button type="button" id="publicQuiz" class="text-xl p-1.5">Play Quiz</button>
+              </div>
+          </form>
+</div>
+      <!--popup cancel quiz-->
+<div id="popupOverlay" style="display:none;" class="fixed inset-0 hidden items-center justify-center z-50">
+     <div class="m-auto w-[40%] h-[10%] opacity-50"></div>
+     <div id="popup" class="relative w-[25%] max-w-md m-auto bg-amber-50 flex flex-col shadow-lg">
+          <div class="flex flex-col items-center p-4">
+               <h2 class="text-xl font-semibold mb-4" id="l2">Are you sure you want to cancel?</h2>
+          </div>
+               <div class="flex flex-row">
+                    <div class="w-[35%]"></div>
+                    <button id="closeQuiz" class="text-xl px-4 py-2">Yes</button>
+                    <button id="keepEditing" class="text-xl px-4 py-2">No</button>
+              </div>
+</div>
+
+
+
+</body>
+
+</html>
