@@ -5,4 +5,4 @@ Please don't download this project  because it still has loading issue and so li
 ## This is some of my game assets
 ![assets and ui](readme_mat/r1.png) ![ui](readme_mat/r2.png)
 
-## More about my [research](https://canva.link/8vi5b2hjz8dllmw)
+## More about my [project](https://canva.link/8vi5b2hjz8dllmw)
